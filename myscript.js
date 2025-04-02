@@ -1,91 +1,120 @@
- // Dark mode toggle
- const themeToggle = document.getElementById('themeToggle');
- const body = document.body;
- const icon = themeToggle.querySelector('i');
+// Profile image modal functionality
+const profileImg = document.querySelector('.profile-img');
+const modal = document.createElement('div');
+modal.className = 'profile-modal';
+modal.innerHTML = `
+    <div class="modal-content">
+        <img src="" alt="Profile Image" class="modal-img">
+        <span class="close-modal">&times;</span>
+    </div>
+`;
+document.body.appendChild(modal);
 
- // Check for saved user preference
- const currentTheme = localStorage.getItem('theme');
- if (currentTheme === 'dark') {
-     body.classList.add('dark-mode');
-     icon.classList.replace('fa-moon', 'fa-sun');
- }
-
- themeToggle.addEventListener('click', () => {
-     body.classList.toggle('dark-mode');
-     
-     if (body.classList.contains('dark-mode')) {
-         icon.classList.replace('fa-moon', 'fa-sun');
-         localStorage.setItem('theme', 'dark');
-     } else {
-         icon.classList.replace('fa-sun', 'fa-moon');
-         localStorage.setItem('theme', 'light');
-     }
- });
-
- // Back to top button
- const backToTop = document.getElementById('backToTop');
- 
- window.addEventListener('scroll', () => {
-     if (window.pageYOffset > 300) {
-         backToTop.classList.add('active');
-     } else {
-         backToTop.classList.remove('active');
-     }
- });
-
- backToTop.addEventListener('click', () => {
-     window.scrollTo({
-         top: 0,
-         behavior: 'smooth'
-     });
- });
-
- // Progress bar
- const progressBar = document.getElementById('progressBar');
- 
- window.addEventListener('scroll', () => {
-     const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-     const scrollProgress = (window.pageYOffset / scrollTotal) * 100;
-     progressBar.style.width = scrollProgress + '%';
- });
-
- // Smooth scrolling for anchor links
- document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-     anchor.addEventListener('click', function(e) {
-         e.preventDefault();
-         document.querySelector(this.getAttribute('href')).scrollIntoView({
-             behavior: 'smooth'
-         });
-     });
- });
-
- // Animation on scroll
- const sections = document.querySelectorAll('.section');
- 
- const observer = new IntersectionObserver((entries) => {
-     entries.forEach(entry => {
-         if (entry.isIntersecting) {
-             entry.target.style.opacity = 1;
-             entry.target.style.transform = 'translateY(0)';
-         }
-     });
- }, { threshold: 0.1 });
-
- sections.forEach(section => {
-     observer.observe(section);
- });
-
- // Navigation toggle for mobile
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-
-navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+profileImg.addEventListener('click', () => {
+    const modalImg = modal.querySelector('.modal-img');
+    modalImg.src = profileImg.src;
+    modal.style.display = 'flex';
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
+modal.querySelector('.close-modal').addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// Add this CSS for the modal
+const modalStyle = document.createElement('style');
+modalStyle.textContent = `
+    .profile-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-content {
+        position: relative;
+        max-width: 80%;
+        max-height: 80vh;
+        text-align: center;
+    }
+    
+    .modal-img {
+        max-width: 100%;
+        max-height: 80vh;
+        border-radius: 50%;
+        border: 5px solid var(--primary-color);
+        animation: zoomIn 0.3s ease-out;
+    }
+    
+    .close-modal {
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .close-modal:hover {
+        color: var(--primary-color);
+    }
+    
+    @keyframes zoomIn {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    
+    @media (max-width: 768px) {
+        .modal-img {
+            width: 90vw;
+            height: 90vw;
+        }
+        
+        .close-modal {
+            top: -30px;
+            right: 0;
+            font-size: 30px;
+        }
+    }
+`;
+document.head.appendChild(modalStyle);
+
+// Contact form submission
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        
+        // Show loading state
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission (replace with actual form submission code)
+        setTimeout(() => {
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+            
+            // Reset form after 2 seconds
+            setTimeout(() => {
+                contactForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }, 1500);
     });
-});
+}
