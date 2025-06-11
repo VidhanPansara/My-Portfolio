@@ -229,25 +229,17 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 document.addEventListener('DOMContentLoaded', function() {
     const profileImg = document.querySelector('.profile-img');
     const profileModal = document.getElementById('profileModal');
-    const closeModal = document.querySelector('.close-modal');
-    const modalImg = document.querySelector('.modal-img');
+    const closeModal = profileModal.querySelector('.close-modal');
 
-    console.log('Profile Image:', profileImg);
-    console.log('Profile Modal:', profileModal);
-    console.log('Close Modal:', closeModal);
-    console.log('Modal Image:', modalImg);
-
-    if (profileImg && profileModal && closeModal && modalImg) {
+    if (profileImg && profileModal && closeModal) {
         // Open modal when clicking on profile image
         profileImg.addEventListener('click', function() {
-            console.log('Profile image clicked');
             profileModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
 
         // Close modal when clicking the close button
         closeModal.addEventListener('click', function() {
-            console.log('Close button clicked');
             profileModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
@@ -255,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close modal when clicking outside the image
         profileModal.addEventListener('click', function(e) {
             if (e.target === profileModal) {
-                console.log('Modal background clicked');
                 profileModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
@@ -264,17 +255,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && profileModal.style.display === 'flex') {
-                console.log('Escape key pressed');
                 profileModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
-        });
-    } else {
-        console.error('Some elements are missing:', {
-            profileImg: !!profileImg,
-            profileModal: !!profileModal,
-            closeModal: !!closeModal,
-            modalImg: !!modalImg
         });
     }
 });
