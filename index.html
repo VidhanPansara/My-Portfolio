@@ -6,12 +6,6 @@
     <title>Vidhan Pansara | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Ensure no background images are set */
-        * {
-            background-image: none !important;
-        }
-    </style>
 </head>
 <body>
     <!-- Progress bar -->
@@ -23,6 +17,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">Vidhan Pansara</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="nav-links" id="navLinks">
                 <a href="#about">About</a>
                 <a href="#education">Education</a>
@@ -45,7 +42,7 @@
     </div>
 
     <!-- Profile Photo Modal -->
-    <div class="profile-modal" id="profileModal" style="display: none;">
+    <div class="profile-modal" id="profileModal">
         <div class="modal-content">
             <img src="myphto.JPG" alt="Vidhan Pansara" class="modal-img">
             <span class="close-modal">&times;</span>
