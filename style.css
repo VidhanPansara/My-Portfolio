@@ -884,58 +884,51 @@ li::before {
     }
 }
 
-/* Enhanced Header and Navigation Styles */
+/* Navigation Styles */
 .navbar {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    background: white;
+    box-shadow: var(--shadow);
     z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .nav-brand {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--dark-color);
     text-decoration: none;
-    transition: var(--transition);
-}
-
-.nav-brand:hover {
-    transform: translateY(-2px);
 }
 
 .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2rem;
+    align-items: center;
 }
 
 .nav-links a {
     color: var(--dark-color);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 0.5rem 0;
-    position: relative;
+    font-weight: 500;
     transition: var(--transition);
+    position: relative;
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     left: 0;
     width: 0;
     height: 2px;
@@ -951,113 +944,7 @@ li::before {
     width: 100%;
 }
 
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.8rem;
-    margin-top: 2rem;
-}
-
-.social-links a {
-    color: var(--dark-color);
-    font-size: 1.6rem;
-    transition: all 0.3s ease;
-    padding: 0.8rem;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.social-links a:hover {
-    color: var(--primary-color);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
-}
-
-/* Profile Photo Modal Styles */
-.profile-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(8px);
-}
-
-.modal-content {
-    position: relative;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-}
-
-.modal-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.close-modal {
-    position: fixed;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 2001;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    backdrop-filter: blur(4px);
-}
-
-.close-modal:hover {
-    transform: rotate(90deg);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Make profile image clickable */
-.profile-img-container {
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .modal-content {
-        width: 300px;
-        height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-content {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .close-modal {
-        top: 15px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 30px;
-    }
-}
-
-/* Mobile Menu Styles - Only visible on mobile */
+/* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -1068,14 +955,7 @@ li::before {
     padding: 0.5rem;
 }
 
-/* Desktop styles remain unchanged */
-@media (min-width: 769px) {
-    .nav-links {
-        display: flex;
-    }
-}
-
-/* Mobile styles */
+/* Mobile Styles */
 @media (max-width: 768px) {
     .mobile-menu-btn {
         display: block;
@@ -1104,6 +984,10 @@ li::before {
         width: 100%;
         text-align: center;
         padding: 0.8rem;
+    }
+
+    .nav-links a::after {
+        bottom: 0;
     }
 
     .container {
@@ -1228,5 +1112,12 @@ li::before {
     .submit-btn {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
+    }
+}
+
+/* Desktop styles remain unchanged */
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex;
     }
 }
