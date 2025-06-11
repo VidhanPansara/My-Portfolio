@@ -684,9 +684,15 @@ li::before {
         padding: 10px;
     }
     
-    .profile-img {
+    .profile-img-container {
         width: 180px;
         height: 180px;
+        margin: 0 auto 2rem;
+    }
+    
+    .profile-img {
+        width: 172px;
+        height: 172px;
     }
     
     h1 {
@@ -756,9 +762,15 @@ li::before {
         margin: 1rem auto;
     }
     
-    .profile-img {
+    .profile-img-container {
         width: 150px;
         height: 150px;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .profile-img {
+        width: 142px;
+        height: 142px;
     }
     
     h1 {
