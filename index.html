@@ -108,7 +108,18 @@
 
         <div class="section" id="contact-form">
             <h2>Contact With Me</h2>
-            <a href="mailto:pansaravidhan@gmail.com" class="submit-btn" style="display:block;max-width:300px;margin:30px auto 0 auto;text-align:center;">Send Me an Email</a>
+            <form id="simpleMailForm" style="max-width:400px;margin:0 auto;text-align:center;">
+                <div class="form-group">
+                    <input type="text" id="userName" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="userEmail" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="userMessage" name="message" placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" style="display:block;max-width:300px;margin:30px auto 0 auto;text-align:center;">Send Me an Email</button>
+            </form>
         </div>
 
         <div class="section" id="contact">
@@ -139,5 +150,17 @@
     </div>
 
     <script src="myscript.js"></script>
+    <script>
+    document.getElementById('simpleMailForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var name = document.getElementById('userName').value;
+        var email = document.getElementById('userEmail').value;
+        var message = document.getElementById('userMessage').value;
+        var mailtoLink = 'mailto:pansaravidhan@gmail.com'
+            + '?subject=' + encodeURIComponent('Message from ' + name)
+            + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+        window.location.href = mailtoLink;
+    });
+    </script>
 </body>
 </html>
