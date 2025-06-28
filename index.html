@@ -118,7 +118,7 @@
                 <div class="form-group">
                     <textarea id="userMessage" name="message" placeholder="Your Message" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="submit-btn" style="display:block;max-width:300px;margin:30px auto 0 auto;text-align:center;">Send Me an Email</button>
+                <button type="submit" class="submit-btn" style="display:block;max-width:300px;margin:30px auto 0 auto;text-align:center;">Send Me a Message</button>
             </form>
         </div>
 
@@ -151,15 +151,44 @@
 
     <script src="myscript.js"></script>
     <script>
-    document.getElementById('simpleMailForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var name = document.getElementById('userName').value;
-        var email = document.getElementById('userEmail').value;
-        var message = document.getElementById('userMessage').value;
-        var mailtoLink = 'mailto:pansaravidhan@gmail.com'
-            + '?subject=' + encodeURIComponent('Message from ' + name)
-            + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
-        window.location.href = mailtoLink;
+    document.getElementById('simpleMailForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let name = document.getElementById('userName').value;
+        let email = document.getElementById('userEmail').value;
+        let message = document.getElementById('userMessage').value;
+
+        // Telegram Bot API
+        let botToken = "7733752822:AAHcjAmyqzGg9jYUD8RhlNRwkQkMjzgQ0Nc"; // Your Telegram bot token
+        let chatId = "5387803337"; // Your Telegram chat ID
+        let telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        // Message Format
+        let telegramMessage = `📩 *New Contact Form Submission* 📩\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n💬 *Message:* ${message}`;
+
+        fetch(telegramURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: telegramMessage,
+                parse_mode: "Markdown"
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                alert("✅ Message sent successfully to Telegram!");
+                document.getElementById("simpleMailForm").reset();
+            } else {
+                alert("❌ Failed to send message.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("❌ Error sending message.");
+        });
     });
     </script>
 </body>
